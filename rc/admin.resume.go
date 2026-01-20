@@ -62,6 +62,7 @@ type putResumeVerifyRequest struct {
 
 func putResumeVerifyHandler(mail_channel chan mail.Mail) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+
 		rsid, err := util.ParseUint(ctx.Param("rsid"))
 		if err != nil {
 			ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -69,7 +70,7 @@ func putResumeVerifyHandler(mail_channel chan mail.Mail) gin.HandlerFunc {
 		}
 
 		var req putResumeVerifyRequest
-
+		
 		err = ctx.BindJSON(&req)
 		if err != nil {
 			ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
